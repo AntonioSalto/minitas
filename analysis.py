@@ -30,6 +30,23 @@ def group_by_tr_type(transactions):
 	transactions = transactions.apply(pd.to_numeric)
 	return  transactions.groupby(level=[0,1,2,3], axis=1).sum()
 
+def insider_score():
+	for cik in set(transactions.columns.get_level_values(0)):
+		ticker = complements[cik]['ticker']
+		stock = yf.Ticker(ticker)
+		prices = stock.history(period='max')
+		if prices['Open']['2010-01-01':].any() == False:
+			continue
+		if 'P' in transactions[cik]['nonDerivative']['A']:
+			cik_ins_p = transactions[cik]['nonDerivative']['A']['P']
+			#cols = df.columns
+			bt = cik_ins_p.apply(lambda x: x > 0)
+			print(bt)
+			#bt.apply(lambda x: list(cols[x.values]), axis=1)
+		else:
+			continue
+	return 1
+
 def plot_all_graphs():
 	for cik in set(transactions.columns.get_level_values(0)):
 		ticker = complements[cik]['ticker']
@@ -57,5 +74,6 @@ def analyse_form_4_main(textBox1, textBox2, textBox3, textBox4):
 		transactions = group_by_tr_type(json_to_df(solapas.merge_solapas_in_df(inputs)))
 		print(transactions)
 		complements = open_json('data/complements.json')
-		plot_all_graphs()
+		insider_score()
+		#plot_all_graphs()
 	return 1
