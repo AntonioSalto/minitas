@@ -19,7 +19,7 @@ def gui():
     root=Tk()
 
     textBox1 = ask_input('search key:', 'mining')
-    textBox2 = ask_input('cik range (int-{int, ""}):', '1-344')
+    textBox2 = ask_input('cik range (int-{int, ""}):', '1-100')
     textBox3 = ask_input('first date (YYYY-MM-DD 00:00:00):', str(datetime.datetime.today()-datetime.timedelta(days=1))[:10])
     textBox4 = ask_input('last date (YYYY-MM-DD 23:59:59):', '2010-01-01')
 

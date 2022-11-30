@@ -40,10 +40,7 @@ def insider_score():
 			continue
 		if 'P' in transactions[cik]['nonDerivative']['A']:
 			cik_ins_p = transactions[cik]['nonDerivative']['A']['P']
-			#cols = df.columns
-			bt = cik_ins_p.apply(lambda x: x > 0)
-			print(bt)
-			#bt.apply(lambda x: list(cols[x.values]), axis=1)
+			print(cik_ins_p.loc[cik_ins_p.ne(0)])
 		else:
 			continue
 	return 1
