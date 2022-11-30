@@ -1,3 +1,4 @@
+#~/OneDrive/Documentos/GitHub/minitas
 import datetime
 from tkinter import *
 

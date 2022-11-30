@@ -8,7 +8,7 @@ def popup(message,title='Error'):
 
 def select_companies(inputs):
     l = []
-    f = open('pres/cik-lookup-data.txt', 'r')
+    f = open('.gitignore/cik-lookup-data.txt', 'r')
     f = f.readlines()
     for i in f:
         if inputs['input_search_key'] in i:

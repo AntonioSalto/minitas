@@ -86,7 +86,7 @@ def spot_work_dates(nodispo_date_intervals, inputs):
     return inputs['cik_ini'], inputs['cik_fin'], inputs['ini_date'], inputs['fin_date'], keep_downloading
 
 def retrieve_key_files_name_elements(inputs):
-    input_search_key_transaction_files = [name for name in os.listdir("C:/Users/Usuario/OneDrive/Documentos/proyectos/minas/EDGAR_SEC/data/transactions/{}".format(inputs['input_search_key']))]
+    input_search_key_transaction_files = [name for name in os.listdir(".gitignore/data/transactions/{}".format(inputs['input_search_key']))]
     input_search_key_transaction_files_elements = []
     for i in range(len(input_search_key_transaction_files)):
         if input_search_key_transaction_files[i] != 'problematic_files':
@@ -97,7 +97,7 @@ def retrieve_key_files_name_elements(inputs):
     return input_search_key_transaction_files_elements
 
 def mod_parameters(inputs):
-    isExist = os.path.exists('data/transactions/{}'.format(inputs['input_search_key']))
+    isExist = os.path.exists('.gitignore/data/transactions/{}'.format(inputs['input_search_key']))
     if not isExist:
         keep_downloading = True
         return inputs['cik_ini'], inputs['cik_fin'], inputs['ini_date'], inputs['fin_date'], keep_downloading
@@ -110,10 +110,10 @@ def mod_parameters(inputs):
 def merge_solapas_in_df(inputs):
     #LOADEO TODAS LAS TRANSACCIONES QUE TENGO DE LA INPUT SEARCH KEY Y MERGE DE TODO NO SOLO DE LO ESTRICTAMENTE NECESARIO
     transactions = ndd()
-    carpetas = [name for name in os.listdir("C:/Users/Usuario/OneDrive/Documentos/proyectos/minas/EDGAR_SEC/data/transactions/{}".format(inputs['input_search_key']))]
+    carpetas = [name for name in os.listdir(".gitignore/data/transactions/{}".format(inputs['input_search_key']))]
     for carpeta in carpetas:
         print(carpeta)
-        transactions_file = 'data/transactions/{}/'.format(inputs['input_search_key']) + carpeta
+        transactions_file = '.gitignore/data/transactions/{}/'.format(inputs['input_search_key']) + carpeta
         print(transactions_file)
         if inputs['input_search_key']+'/'+inputs['input_search_key'] in transactions_file:
             transactions_file_content = open_json(transactions_file)

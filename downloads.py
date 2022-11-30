@@ -97,16 +97,16 @@ def save_files(inputs):
     file_cik_ini, file_cik_fin = str(inputs['cik_ini']), str(inputs['cik_fin'])
     file_ini_date, file_fin_date = str(inputs['ini_date'])[:10], str(inputs['fin_date'])[:10]
     full_full_name = '{}_{}_{}_{}_{}'.format(inputs['input_search_key'], file_cik_ini, file_cik_fin, file_ini_date, file_fin_date)
-    isExist = os.path.exists('data/transactions/{}'.format(inputs['input_search_key']))
+    isExist = os.path.exists('.gitignore/data/transactions/{}'.format(inputs['input_search_key']))
     if not isExist:
-        os.makedirs('data/transactions/{}'.format(inputs['input_search_key']))
-        os.makedirs('data/transactions/{}/problematic_files'.format(inputs['input_search_key']))
-    save_json(transactions, 'data/transactions/{}/{}'.format(inputs['input_search_key'], full_full_name))
+        os.makedirs('.gitignore/data/transactions/{}'.format(inputs['input_search_key']))
+        os.makedirs('.gitignore/data/transactions/{}/problematic_files'.format(inputs['input_search_key']))
+    save_json(transactions, '.gitignore/data/transactions/{}/{}'.format(inputs['input_search_key'], full_full_name))
     #SI NO HA HABIDO NINGUN PB EN LA RED CIKDATE NO QUIERO TENER EL PB FILES MOLESTANDO
     if len(problematic_files) != 0:
-        save_json(problematic_files, 'data/transactions/{}/problematic_files/{}'.format(inputs['input_search_key'], full_full_name))
-    save_json(complements, 'data/complements')
-    save_json(parentings, 'data/parentings')
+        save_json(problematic_files, '.gitignore/data/transactions/{}/problematic_files/{}'.format(inputs['input_search_key'], full_full_name))
+    save_json(complements, '.gitignore/data/complements')
+    save_json(parentings, '.gitignore/data/parentings')
     print('Files saved: {} de {} a {} de {} a {}'.format(inputs['input_search_key'], str(inputs['cik_ini']), str(inputs['cik_fin']), str(inputs['ini_date']), str(inputs['fin_date'])))
     
 def find_quarters_init(inputs):
@@ -194,12 +194,12 @@ def download_form_4_main(textBox1, textBox2, textBox3, textBox4):
         transactions, problematic_files = ndd(), {}
         #ESTO ES PORSI TE HA DADO POR BORRARLO TODO PARA HACER PRUEBAS O LO QUE SEA
         
-        isExist2 = os.path.exists('data/transactions')
+        isExist2 = os.path.exists('.gitignore/data/transactions')
         if isExist2:
-            complements = open_json('data/complements.json')
-            parentings = open_json('data/parentings.json')
+            complements = open_json('.gitignore/data/complements.json')
+            parentings = open_json('.gitignore/data/parentings.json')
         else:
-            os.makedirs('data/transactions')
+            os.makedirs('.gitignore/data/transactions')
             complements, parentings = {}, {}
         
         request_count = 0
@@ -234,14 +234,14 @@ def download_form_4_main(textBox1, textBox2, textBox3, textBox4):
                     
                             filing_number = filing[4].split('/')[-1][:-4].replace('-', '')
                             request_count = control_requests_rate(request_count)
-                            document_content = requests.get(f'https://www.sec.gov/Archives/edgar/data/{cik_num}/{filing_number}/index.json', headers={"User-Agent": "Mozilla/5.0"}).json()
+                            document_content = requests.get(f'https://www.sec.gov/Archives/edgar/.gitignore/data/{cik_num}/{filing_number}/index.json', headers={"User-Agent": "Mozilla/5.0"}).json()
                             for document in document_content['directory']['item']:
                                 document_name = document['name']
                                 if '.xml' in document_name:
 
                                     request_count = control_requests_rate(request_count)
                                     try:
-                                        data = xmltodict.parse(requests.get(f'https://www.sec.gov/Archives/edgar/data/{cik_num}/{filing_number}/{document_name}', headers={"User-Agent": "Mozilla/5.0"}).content)
+                                        data = xmltodict.parse(requests.get(f'https://www.sec.gov/Archives/edgar/.gitignore/data/{cik_num}/{filing_number}/{document_name}', headers={"User-Agent": "Mozilla/5.0"}).content)
                                     except:
                                         problematic_files = add_pb_file(cik_num, filing_number, 'REQUESTS NO HA LEIDO EL CIK')
                                         break

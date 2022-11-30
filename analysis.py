@@ -74,7 +74,7 @@ def analyse_form_4_main(textBox1, textBox2, textBox3, textBox4):
 	if (inputs := inputs_management.retrieve_analysis_inputs(textBox1, textBox2, textBox3, textBox4, run = True))['keep_downloading'] == False:
 		transactions = group_by_tr_type(json_to_df(solapas.merge_solapas_in_df(inputs)))
 		print(transactions)
-		complements = open_json('data/complements.json')
+		complements = open_json('.gitignore/data/complements.json')
 		insider_score()
 		#plot_all_graphs()
 	return 1
