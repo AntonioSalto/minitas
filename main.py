@@ -46,7 +46,14 @@ def gui():
     return 1
 gui()
 #------------------------------------------------------------------------------
+#voy a venir necesitando las shares totales que tiene cada persona para el insider score
 
+#esta roto solapas o algo porque cojas la red que cojas te salen los mismo graficos
+
+#no se porque cada vez que descargo un dia me mira todo el año (todos los quarter all forms filings)
+#solo lo hace cuando analizo no cuando descargo
+
+#claramente en este sector tienes que tener en cuenta la volatilidad hstorica de la accion para saber en que %loss poner el stoploss
 #------------------------------------------------------------------------------
 #hay veces que en derivative ponen dinero en vez de shares osea el value en vez de las shares, no se de que depende
 
