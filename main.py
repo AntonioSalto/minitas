@@ -19,7 +19,7 @@ def gui():
     root=Tk()
 
     textBox1 = ask_input('search key:', 'mining')
-    textBox2 = ask_input('cik range (int-{int, ""}):', '1-344')
+    textBox2 = ask_input('cik range (int-{int, ""}):', '1-100')
     textBox3 = ask_input('first date (YYYY-MM-DD 00:00:00):', str(datetime.datetime.today()-datetime.timedelta(days=1))[:10])
     textBox4 = ask_input('last date (YYYY-MM-DD 23:59:59):', '2010-01-01')
 
@@ -46,7 +46,14 @@ def gui():
     return 1
 gui()
 #------------------------------------------------------------------------------
+#voy a venir necesitando las shares totales que tiene cada persona para el insider score
 
+#esta roto solapas o algo porque cojas la red que cojas te salen los mismo graficos
+
+#no se porque cada vez que descargo un dia me mira todo el año (todos los quarter all forms filings)
+#solo lo hace cuando analizo no cuando descargo
+
+#claramente en este sector tienes que tener en cuenta la volatilidad hstorica de la accion para saber en que %loss poner el stoploss
 #------------------------------------------------------------------------------
 #hay veces que en derivative ponen dinero en vez de shares osea el value en vez de las shares, no se de que depende
 

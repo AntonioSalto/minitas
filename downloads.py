@@ -234,17 +234,17 @@ def download_form_4_main(textBox1, textBox2, textBox3, textBox4):
                     
                             filing_number = filing[4].split('/')[-1][:-4].replace('-', '')
                             request_count = control_requests_rate(request_count)
-                            document_content = requests.get(f'https://www.sec.gov/Archives/edgar/.gitignore/data/{cik_num}/{filing_number}/index.json', headers={"User-Agent": "Mozilla/5.0"}).json()
+                            document_content = requests.get(f'https://www.sec.gov/Archives/edgar/data/{cik_num}/{filing_number}/index.json', headers={"User-Agent": "Mozilla/5.0"}).json()
                             for document in document_content['directory']['item']:
                                 document_name = document['name']
                                 if '.xml' in document_name:
 
                                     request_count = control_requests_rate(request_count)
                                     try:
-                                        data = xmltodict.parse(requests.get(f'https://www.sec.gov/Archives/edgar/.gitignore/data/{cik_num}/{filing_number}/{document_name}', headers={"User-Agent": "Mozilla/5.0"}).content)
+                                        data = xmltodict.parse(requests.get(f'https://www.sec.gov/Archives/edgar/data/{cik_num}/{filing_number}/{document_name}', headers={"User-Agent": "Mozilla/5.0"}).content)
                                     except:
                                         problematic_files = add_pb_file(cik_num, filing_number, 'REQUESTS NO HA LEIDO EL CIK')
-                                        break
+                                        continue
                                     transactions, complements = fill_transactions(data, filing_number, str(publi_date)[:10], cik_num)
                                        
             #esto para preparar el siguiente quarter
