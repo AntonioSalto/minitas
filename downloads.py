@@ -213,7 +213,7 @@ def download_form_4_main(textBox1, textBox2, textBox3, textBox4):
             quarter_all_forms_pre = quarter_all_forms_pre.decode('latin-1').split('\n')
             quarter_all_forms, seen_ciks = set(), set()
             for filing_info in quarter_all_forms_pre:
-                if inputs['input_search_key'] in filing_info:
+                if inputs['input_search_key'] in filing_info.upper():
                     quarter_all_forms.add(filing_info)
             cik_count = inputs['cik_ini'] - 1
             #iria mas rapido si vas cogiendo todo del txt directo en vez del xml pero pereza cambiar tanto
